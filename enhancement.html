@@ -26,9 +26,7 @@
 
     <header>
         <h1>Speech Separation & Enhancement</h1>
-        <p class="subtitle">
-            Qualitative audio examples for an anonymous submission.
-        </p>
+        <p class="subtitle">Qualitative audio examples for an anonymous submission.</p>
     </header>
 
     <nav class="tabs">
@@ -39,9 +37,6 @@
 
     <section class="group">
         <h2>Enhancement</h2>
-        <p class="group-desc">
-            Single-speaker speech enhancement results.
-        </p>
 
         <!-- ================= DCASE ================= -->
 
@@ -50,39 +45,65 @@
                 <h4>DCASE noise with one active speaker</h4>
             </div>
 
-            <h5>Mixture</h5>
-            <audio controls src="samples/enhancement/enhancement_vox2_dcase/mix.wav"></audio>
-
-            <h5>Speaker 1</h5>
+            <h5>Noisey</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+                <tr>
+                    <td>Noisey</td>
+                    <td><audio controls src="samples/enhancement/enhancement_vox2_dcase/mix.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/enhancement/enhancement_vox2_dcase/mix.wav">loading…
+                    </td>
+                </tr>
+            </table>
+
+            <h5>Enhanced</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
                     <td>Reference</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/reference.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/reference.wav">loading…
+                    </td>
                 </tr>
 
                 <tr>
                     <td>FlowAvse</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/flowavse.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/flowavse.wav">loading…
+                    </td>
                 </tr>
 
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/ravss.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/ravss.wav">loading…
+                    </td>
                 </tr>
 
                 <tr>
                     <td>Proposed</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/proposed.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/proposed.wav">loading…
+                    </td>
                 </tr>
+
             </table>
         </div>
 
@@ -93,55 +114,87 @@
                 <h4>DNS noise with one active speaker</h4>
             </div>
 
-            <h5>Mixture</h5>
-            <audio controls src="samples/enhancement/enhancement_vox2_dns/mix.wav"></audio>
-
-            <h5>Speaker 1</h5>
+            <h5>Noisey</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+                <tr>
+                    <td>Noisey</td>
+                    <td><audio controls src="samples/enhancement/enhancement_vox2_dns/mix.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/enhancement/enhancement_vox2_dns/mix.wav">loading…</td>
+                </tr>
+            </table>
+
+            <h5>Enhanced</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
                     <td>Reference</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/reference.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/reference.wav">loading…
+                    </td>
                 </tr>
 
                 <tr>
                     <td>FlowAvse</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/flowavse.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/flowavse.wav">loading…
+                    </td>
                 </tr>
 
                 <tr>
                     <td>FlowAvse - Trained on 2 speakers</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/flowavse2.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/flowavse2.wav">loading…
+                    </td>
                 </tr>
 
                 <tr>
                     <td>FlowAvse - Trained on 3 speakers</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/flowavse3.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/flowavse3.wav">loading…
+                    </td>
                 </tr>
 
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/ravss.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/ravss.wav">loading…</td>
                 </tr>
 
                 <tr>
                     <td>Proposed</td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/proposed.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/proposed.wav">loading…
+                    </td>
                 </tr>
+
             </table>
         </div>
+
     </section>
 
+    <script src="asr.js"></script>
 </body>
 
 </html>

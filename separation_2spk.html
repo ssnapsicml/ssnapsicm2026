@@ -37,23 +37,35 @@
 
     <section class="group">
         <h2>2-Speaker Separation</h2>
-        <p class="group-desc">
-            Full separation of two active speakers from a single mixture.
-        </p>
+
+        <!-- ================= DCASE ================= -->
 
         <div class="sample-card">
             <div class="sample-header">
-                <h4>DCASE noise with two active speaker</h4>
+                <h4>DCASE noise with two active speakers</h4>
             </div>
 
             <h5>Mixture</h5>
-            <audio controls src="samples/2_spk_separation/separation_vox2_dcase/mix.wav"></audio>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+                <tr>
+                    <td>Mixture</td>
+                    <td><audio controls src="samples/2_spk_separation/separation_vox2_dcase/mix.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/2_spk_separation/separation_vox2_dcase/mix.wav">
+                        loading…</td>
+                </tr>
+            </table>
 
             <h5>Speaker 1</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
@@ -61,6 +73,9 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/reference.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/reference.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -68,13 +83,17 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/flowavse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/flowavse.wav">
+                        loading…</td>
                 </tr>
-
 
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/ravss.wav"></audio>
+                            src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/ravss.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/ravss.wav">loading…
                     </td>
                 </tr>
 
@@ -83,13 +102,18 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/proposed.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/proposed.wav">
+                        loading…</td>
                 </tr>
             </table>
+
             <h5>Speaker 2</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
@@ -97,6 +121,9 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/reference.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/reference.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -104,13 +131,17 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/flowavse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/flowavse.wav">
+                        loading…</td>
                 </tr>
-
 
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/ravss.wav"></audio>
+                            src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/ravss.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/ravss.wav">loading…
                     </td>
                 </tr>
 
@@ -119,24 +150,41 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/proposed.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/proposed.wav">
+                        loading…</td>
                 </tr>
             </table>
         </div>
-
+        <!-- ================= DNS ================= -->
 
         <div class="sample-card">
             <div class="sample-header">
-                <h4>DNS noise with two active speakers, snr=0dB</h4>
+                <h4>DNS noise with two active speakers, SNR=5dB</h4>
             </div>
 
             <h5>Mixture</h5>
-            <audio controls src="samples/2_spk_separation/separation_vox2_dns_0db/mix.wav"></audio>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+                <tr>
+                    <td>Mixture</td>
+                    <td><audio controls src="samples/2_spk_separation/separation_vox2_dns_0db/mix.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/mix.wav">
+                        loading…
+                    </td>
+                </tr>
+            </table>
 
             <h5>Speaker 1</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
@@ -144,6 +192,9 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/reference.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/reference.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -151,45 +202,37 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/flowavse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/flowavse.wav">
+                        loading…</td>
                 </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 1 speaker</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/flowavse1.wav"></audio>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 3 speakers</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/flowavse3.wav"></audio>
-                    </td>
-                </tr>
-
-
 
                 <tr>
                     <td>AVuDiffSE</td>
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/avudiffse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/avudiffse.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
                     <td>DPS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/dps.wav"></audio>
+                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/dps.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/dps.wav">loading…
                     </td>
                 </tr>
 
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/ravss.wav"></audio>
-                    </td>
+                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/ravss.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/ravss.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -197,13 +240,18 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/proposed.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/proposed.wav">
+                        loading…</td>
                 </tr>
             </table>
+
             <h5>Speaker 2</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
@@ -211,6 +259,9 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/reference.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/reference.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -218,44 +269,37 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/flowavse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/flowavse.wav">
+                        loading…</td>
                 </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 1 speaker</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/flowavse1.wav"></audio>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 3 speakers</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/flowavse3.wav"></audio>
-                    </td>
-                </tr>
-
-
 
                 <tr>
                     <td>AVuDiffSE</td>
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/avudiffse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/avudiffse.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
                     <td>DPS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/dps.wav"></audio>
+                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/dps.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/dps.wav">loading…
                     </td>
                 </tr>
+
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/ravss.wav"></audio>
-                    </td>
+                            src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/ravss.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/ravss.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -263,6 +307,9 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/proposed.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/proposed.wav">
+                        loading…</td>
                 </tr>
             </table>
         </div>
@@ -270,17 +317,31 @@
 
         <div class="sample-card">
             <div class="sample-header">
-                <h4>DNS noise with two active speakers, snr=5dB</h4>
+                <h4>DNS noise with two active speakers,SNR=5dB</h4>
             </div>
 
             <h5>Mixture</h5>
-            <audio controls src="samples/2_spk_separation/separation_vox2_dns_5db/mix.wav"></audio>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+                <tr>
+                    <td>Mixture</td>
+                    <td><audio controls src="samples/2_spk_separation/separation_vox2_dns_5db/mix.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/mix.wav">
+                        loading…
+                    </td>
+                </tr>
+            </table>
 
             <h5>Speaker 1</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
@@ -288,6 +349,9 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/reference.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/reference.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -295,45 +359,37 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/flowavse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/flowavse.wav">
+                        loading…</td>
                 </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 1 speaker</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/flowavse1.wav"></audio>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 3 speakers</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/flowavse3.wav"></audio>
-                    </td>
-                </tr>
-
-
 
                 <tr>
                     <td>AVuDiffSE</td>
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/avudiffse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/avudiffse.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
                     <td>DPS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/dps.wav"></audio>
+                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/dps.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/dps.wav">loading…
                     </td>
                 </tr>
 
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/ravss.wav"></audio>
-                    </td>
+                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/ravss.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/ravss.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -341,13 +397,18 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/proposed.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/proposed.wav">
+                        loading…</td>
                 </tr>
             </table>
+
             <h5>Speaker 2</h5>
             <table>
                 <tr>
                     <th>System</th>
                     <th>Audio</th>
+                    <th>ASR Transcription</th>
                 </tr>
 
                 <tr>
@@ -355,6 +416,9 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/reference.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/reference.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -362,44 +426,37 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/flowavse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/flowavse.wav">
+                        loading…</td>
                 </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 1 speaker</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/flowavse1.wav"></audio>
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td>FlowAvse - Trained on 3 speakers</td>
-                    <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/flowavse3.wav"></audio>
-                    </td>
-                </tr>
-
-
 
                 <tr>
                     <td>AVuDiffSE</td>
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/avudiffse.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/avudiffse.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
                     <td>DPS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/dps.wav"></audio>
+                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/dps.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/dps.wav">loading…
                     </td>
                 </tr>
+
                 <tr>
                     <td>RAVSS</td>
                     <td><audio controls
-                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/ravss.wav"></audio>
-                    </td>
+                            src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/ravss.wav"></audio></td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/ravss.wav">
+                        loading…</td>
                 </tr>
 
                 <tr>
@@ -407,12 +464,19 @@
                     <td><audio controls
                             src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/proposed.wav"></audio>
                     </td>
+                    <td class="asr-cell"
+                        data-audio-src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/proposed.wav">
+                        loading…</td>
                 </tr>
             </table>
         </div>
-    </section>
+
+
+        </div>
+
     </section>
 
+    <script src="asr.js"></script>
 </body>
 
 </html>
