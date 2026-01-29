@@ -10,57 +10,54 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Store audio-video mappings
-        const audioVideoMap = new Map();
-
+        // Simple audio-video sync: when audio plays, play video; when audio pauses, pause video
         document.querySelectorAll('table').forEach(table => {
             const rows = table.querySelectorAll('tr');
             rows.forEach(row => {
                 const audio = row.querySelector('audio');
-                if (audio) {
-                    const videos = row.querySelectorAll('video');
-                    if (videos.length > 0) {
-                        audioVideoMap.set(audio, Array.from(videos));
-                    }
-                }
-            });
-        });
+                const videos = row.querySelectorAll('video');
 
-        // Handle play events
-        document.addEventListener('play', event => {
-            if (event.target.tagName !== 'AUDIO' && event.target.tagName !== 'VIDEO') return;
-
-            // Pause all other media (except the one being played)
-            document.querySelectorAll('audio, video').forEach(media => {
-                if (media !== event.target) {
-                    media.pause();
-                    try { media.currentTime = 0; } catch (e) { }
-                }
-            });
-
-            // If audio is played, sync its videos
-            if (event.target.tagName === 'AUDIO') {
-                const videos = audioVideoMap.get(event.target);
-                if (videos) {
-                    videos.forEach(vid => {
-                        vid.currentTime = 0;
-                        vid.play().catch(() => { });
+                if (audio && videos.length > 0) {
+                    // When audio plays, play all videos in this row
+                    audio.addEventListener('play', () => {
+                        videos.forEach(vid => {
+                            vid.currentTime = audio.currentTime;
+                            vid.play().catch(() => { });
+                        });
                     });
-                }
-            }
-        }, true);
 
-        // Sync video play with audio
-        document.querySelectorAll('video').forEach(video => {
-            video.addEventListener('play', (e) => {
-                // Find corresponding audio in the same row
-                const row = video.closest('tr');
-                if (row) {
-                    const audio = row.querySelector('audio');
-                    if (audio && audio !== e.target) {
-                        audio.currentTime = 0;
-                        audio.play().catch(() => { });
-                    }
+                    // When audio pauses, pause all videos
+                    audio.addEventListener('pause', () => {
+                        videos.forEach(vid => {
+                            vid.pause();
+                        });
+                    });
+
+                    // Sync time as audio progresses
+                    audio.addEventListener('timeupdate', () => {
+                        videos.forEach(vid => {
+                            if (Math.abs(vid.currentTime - audio.currentTime) > 0.1) {
+                                vid.currentTime = audio.currentTime;
+                            }
+                        });
+                    });
+
+                    // When video plays, play audio too
+                    videos.forEach(vid => {
+                        vid.addEventListener('play', () => {
+                            if (audio.paused) {
+                                audio.currentTime = vid.currentTime;
+                                audio.play().catch(() => { });
+                            }
+                        });
+
+                        // When video pauses, pause audio too
+                        vid.addEventListener('pause', () => {
+                            if (!audio.paused) {
+                                audio.pause();
+                            }
+                        });
+                    });
                 }
             });
         });
@@ -118,7 +115,7 @@
                 <tr>
                     <td>Noisey</td>
                     <td>
-                        <video muted controls
+                        <video controls
                             src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/reference.mp4"></video>
                     </td>
                     <td><audio controls src="samples/enhancement/enhancement_vox2_dcase/mix.wav"></audio></td>
@@ -197,7 +194,7 @@
                 <tr>
                     <td>Noisey</td>
                     <td>
-                        <video muted controls
+                        <video controls
                             src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/reference.mp4"></video>
                     </td>
                     <td><audio controls src="samples/enhancement/enhancement_vox2_dns/mix.wav"></audio></td>
