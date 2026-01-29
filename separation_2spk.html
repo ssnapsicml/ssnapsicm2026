@@ -17,7 +17,7 @@
         document.addEventListener('play', event => {
             if (event.target.tagName !== 'AUDIO' && event.target.tagName !== 'VIDEO') return;
 
-            // Pause all other media
+            // Pause all other media (except the one being played)
             document.querySelectorAll('audio, video').forEach(media => {
                 if (media !== event.target) {
                     media.pause();
