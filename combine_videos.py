@@ -25,9 +25,13 @@ def combine_videos_2spk():
             # Remove existing file
             if output_video.exists():
                 os.remove(output_video)
+            # Use tpad to pad shorter video to match duration, then hstack
             cmd = [
                 "ffmpeg", "-i", str(spk1_video), "-i", str(spk2_video),
-                "-filter_complex", "[0:v][1:v]hstack=inputs=2[v]",
+                "-filter_complex", 
+                "[0:v]tpad=stop_mode=clone[v0];"
+                "[1:v]tpad=stop_mode=clone[v1];"
+                "[v0][v1]hstack=inputs=2[v]",
                 "-map", "[v]",
                 "-an",  # No audio
                 "-c:v", "libx264", "-preset", "medium", "-crf", "23",
