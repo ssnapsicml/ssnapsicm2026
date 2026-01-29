@@ -29,8 +29,8 @@ def combine_videos_2spk():
                 "ffmpeg", "-i", str(spk1_video), "-i", str(spk2_video),
                 "-filter_complex", "[0:v][1:v]hstack=inputs=2[v]",
                 "-map", "[v]",
+                "-an",  # No audio
                 "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-                "-c:a", "aac", "-b:a", "128k",
                 str(output_video)
             ]
             subprocess.run(cmd, check=True)
@@ -66,8 +66,8 @@ def combine_videos_3spk():
                 "[2:v]scale=240:270[right];"
                 "[top][left][right]xstack=inputs=3:layout=0_0|0_h0|w0_h0[v]",
                 "-map", "[v]",
+                "-an",  # No audio
                 "-c:v", "libx264", "-preset", "medium", "-crf", "23",
-                "-c:a", "aac", "-b:a", "128k",
                 str(output_video)
             ]
             subprocess.run(cmd, check=True)
