@@ -10,10 +10,23 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Map each audio element to its corresponding video(s)
-        // For mixture audio: play all speaker videos from the mixture row
-        // For system audio: play the corresponding speaker's video from the mixture row
+        // Store audio-video mappings
+        const audioVideoMap = new Map();
 
+        document.querySelectorAll('table').forEach(table => {
+            const rows = table.querySelectorAll('tr');
+            rows.forEach(row => {
+                const audio = row.querySelector('audio');
+                if (audio) {
+                    const videos = row.querySelectorAll('video');
+                    if (videos.length > 0) {
+                        audioVideoMap.set(audio, Array.from(videos));
+                    }
+                }
+            });
+        });
+
+        // Handle play events
         document.addEventListener('play', event => {
             if (event.target.tagName !== 'AUDIO' && event.target.tagName !== 'VIDEO') return;
 
@@ -25,49 +38,32 @@
                 }
             });
 
-            // If an audio is played, sync and play its corresponding video(s) muted
+            // If audio is played, sync its videos
             if (event.target.tagName === 'AUDIO') {
-                const audioRow = event.target.closest('tr');
-                if (!audioRow) return;
-
-                const systemName = audioRow.querySelector('td').textContent.trim();
-                const card = audioRow.closest('.sample-card');
-                if (!card) return;
-
-                // Find the mixture table (first table in the card)
-                const mixtureTable = card.querySelector('table');
-                if (!mixtureTable) return;
-
-                const mixtureRow = mixtureTable.querySelector('tr:last-child');
-                if (!mixtureRow) return;
-
-                // Get all videos in the mixture row
-                const videosInMixture = mixtureRow.querySelectorAll('video');
-
-                if (systemName === 'Mixture') {
-                    // Play all videos
-                    videosInMixture.forEach(vid => {
-                        vid.muted = true;
+                const videos = audioVideoMap.get(event.target);
+                if (videos) {
+                    videos.forEach(vid => {
                         vid.currentTime = 0;
                         vid.play().catch(() => { });
                     });
-                } else {
-                    // For system rows: find which speaker this is (spk1, spk2, spk3)
-                    const audioSrc = event.target.getAttribute('src');
-                    const speakerMatch = audioSrc.match(/spk(\d+)/);
-                    if (speakerMatch) {
-                        const speakerNum = parseInt(speakerMatch[1]);
-                        // Play only the corresponding video (nth video in the mixture row)
-                        if (videosInMixture[speakerNum - 1]) {
-                            const vid = videosInMixture[speakerNum - 1];
-                            vid.muted = true;
-                            vid.currentTime = 0;
-                            vid.play().catch(() => { });
-                        }
-                    }
                 }
             }
         }, true);
+
+        // Sync video play with audio
+        document.querySelectorAll('video').forEach(video => {
+            video.addEventListener('play', (e) => {
+                // Find corresponding audio in the same row
+                const row = video.closest('tr');
+                if (row) {
+                    const audio = row.querySelector('audio');
+                    if (audio && audio !== e.target) {
+                        audio.currentTime = 0;
+                        audio.play().catch(() => { });
+                    }
+                }
+            });
+        });
 
         // Normalize table rows so they match header column count
         document.querySelectorAll('table').forEach(table => {
@@ -123,9 +119,9 @@
                     <td>Mixture</td>
                     <td>
                         <div style="display: flex; gap: 10px;">
-                            <video muted
+                            <video muted controls
                                 src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk1/reference.mp4"></video>
-                            <video muted
+                            <video muted controls
                                 src="samples/2_spk_separation/separation_vox2_dcase/speakers/spk2/reference.mp4"></video>
                         </div>
                     </td>
@@ -253,9 +249,9 @@
                     <td>Mixture</td>
                     <td>
                         <div style="display: flex; gap: 10px;">
-                            <video muted
+                            <video muted controls
                                 src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk1/reference.mp4"></video>
-                            <video muted
+                            <video muted controls
                                 src="samples/2_spk_separation/separation_vox2_dns_0db/speakers/spk2/reference.mp4"></video>
                         </div>
                     </td>
@@ -425,9 +421,9 @@
                     <td>Mixture</td>
                     <td>
                         <div style="display: flex; gap: 10px;">
-                            <video muted
+                            <video muted controls
                                 src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk1/reference.mp4"></video>
-                            <video muted
+                            <video muted controls
                                 src="samples/2_spk_separation/separation_vox2_dns_5db/speakers/spk2/reference.mp4"></video>
                         </div>
                     </td>
