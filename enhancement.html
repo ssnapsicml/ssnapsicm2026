@@ -11,8 +11,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Map each audio element to its corresponding video(s)
-        // For mixture audio: play all speaker videos
-        // For system audio: play the corresponding speaker video
+        // For mixture audio: play speaker video from the mixture row
+        // For system audio: play the corresponding speaker video from the mixture row
 
         document.addEventListener('play', event => {
             if (event.target.tagName !== 'AUDIO' && event.target.tagName !== 'VIDEO') return;
@@ -27,43 +27,37 @@
 
             // If an audio is played, sync and play its corresponding video(s) muted
             if (event.target.tagName === 'AUDIO') {
-                const audioSrc = event.target.getAttribute('src');
                 const audioRow = event.target.closest('tr');
+                if (!audioRow) return;
 
-                if (audioRow) {
-                    const systemName = audioRow.querySelector('td').textContent.trim();
+                const systemName = audioRow.querySelector('td').textContent.trim();
+                const card = audioRow.closest('.sample-card');
+                if (!card) return;
 
-                    // For "Noisey" (mixture) rows: play the speaker video
-                    if (systemName === 'Noisey') {
-                        // Find the speaker table after this Noisey row (within the same card)
-                        const card = audioRow.closest('.sample-card');
-                        const tables = card.querySelectorAll('table');
-                        const noiseTableIndex = Array.from(tables).indexOf(audioRow.closest('table'));
+                // Find the mixture table (first table in the card)
+                const mixtureTable = card.querySelector('table');
+                if (!mixtureTable) return;
 
-                        // Play speaker video from the Enhanced table
-                        if (noiseTableIndex + 1 < tables.length) {
-                            const refRow = tables[noiseTableIndex + 1].querySelector('tr:has(td:contains("Reference"))');
-                            if (!refRow) {
-                                const vid = tables[noiseTableIndex + 1].querySelector('video');
-                                if (vid) {
-                                    vid.muted = true;
-                                    vid.play().catch(() => { });
-                                }
-                            } else {
-                                const vid = refRow.querySelector('video');
-                                if (vid) {
-                                    vid.muted = true;
-                                    vid.play().catch(() => { });
-                                }
-                            }
-                        }
-                    } else {
-                        // For system rows: find and play the corresponding video in the same row
-                        const vid = audioRow.querySelector('video');
-                        if (vid) {
-                            vid.muted = true;
-                            vid.play().catch(() => { });
-                        }
+                const mixtureRow = mixtureTable.querySelector('tr:last-child');
+                if (!mixtureRow) return;
+
+                // Get all videos in the mixture row
+                const videosInMixture = mixtureRow.querySelectorAll('video');
+
+                if (systemName === 'Noisey' || systemName === 'Mixture') {
+                    // Play all videos
+                    videosInMixture.forEach(vid => {
+                        vid.muted = true;
+                        vid.currentTime = 0;
+                        vid.play().catch(() => { });
+                    });
+                } else {
+                    // For system rows: play the speaker video from mixture (only one speaker for enhancement)
+                    if (videosInMixture[0]) {
+                        const vid = videosInMixture[0];
+                        vid.muted = true;
+                        vid.currentTime = 0;
+                        vid.play().catch(() => { });
                     }
                 }
             }
@@ -142,8 +136,7 @@
 
                 <tr>
                     <td>Reference</td>
-                    <td><video controls
-                            src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/reference.mp4"></video></td>
+                    <td></td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dcase/speakers/spk1/reference.wav"></audio></td>
                     <td class="asr-cell"
@@ -220,8 +213,7 @@
 
                 <tr>
                     <td>Reference</td>
-                    <td><video controls
-                            src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/reference.mp4"></video></td>
+                    <td></td>
                     <td><audio controls
                             src="samples/enhancement/enhancement_vox2_dns/speakers/spk1/reference.wav"></audio></td>
                     <td class="asr-cell"
