@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Off-Screen Speakers – Audio Samples</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Simple audio-video sync: when audio plays, play video; when audio pauses, pause video
+        document.querySelectorAll('table').forEach(table => {
+            const rows = table.querySelectorAll('tr');
+            rows.forEach(row => {
+                const audio = row.querySelector('audio');
+                const videos = row.querySelectorAll('video');
+
+                if (audio && videos.length > 0) {
+                    // When audio plays, play all videos in this row
+                    audio.addEventListener('play', () => {
+                        videos.forEach(vid => {
+                            vid.currentTime = audio.currentTime;
+                            vid.play().catch(() => { });
+                        });
+                    });
+
+                    // When audio pauses, pause all videos
+                    audio.addEventListener('pause', () => {
+                        videos.forEach(vid => {
+                            vid.pause();
+                        });
+                    });
+
+                    // Sync time as audio progresses
+                    audio.addEventListener('timeupdate', () => {
+                        videos.forEach(vid => {
+                            if (Math.abs(vid.currentTime - audio.currentTime) > 0.1) {
+                                vid.currentTime = audio.currentTime;
+                            }
+                        });
+                    });
+
+                    // When video plays, play audio too
+                    videos.forEach(vid => {
+                        vid.addEventListener('play', () => {
+                            if (audio.paused) {
+                                audio.currentTime = vid.currentTime;
+                                audio.play().catch(() => { });
+                            }
+                        });
+
+                        // When video pauses, pause audio too
+                        vid.addEventListener('pause', () => {
+                            if (!audio.paused) {
+                                audio.pause();
+                            }
+                        });
+                    });
+                }
+            });
+        });
+
+        // Normalize table rows so they match header column count
+        document.querySelectorAll('table').forEach(table => {
+            const headerCount = table.querySelectorAll('th').length;
+            if (!headerCount) return;
+            table.querySelectorAll('tr').forEach(tr => {
+                let cells = tr.querySelectorAll('td');
+                if (cells.length === 0) return;
+                while (cells.length < headerCount) {
+                    const empty = document.createElement('td');
+                    empty.innerHTML = '';
+                    tr.insertBefore(empty, tr.children[1] || null);
+                    cells = tr.querySelectorAll('td');
+                }
+            });
+        });
+    });
+</script>
+
+<body>
+
+    <header>
+        <h1>SSNAPS: Audio-Visual Separation of Speech and Background Noise with Diffusion Inverse Sampling</h1>
+        <p class="subtitle">Qualitative audio examples.</p>
+    </header>
+
+    <nav class="tabs">
+        <a class="tab" href="index.html">Abstract</a>
+        <a class="tab" href="enhancement.html">1 Speaker</a>
+        <a class="tab" href="separation_2spk.html">2 Speakers</a>
+        <a class="tab" href="separation_3spk.html">3 Speakers</a>
+        <a class="tab active" href="separation_offscreen.html">Off-Screen</a>
+    </nav>
+
+    <section class="group">
+        <h2>Off-Screen Speaker Separation</h2>
+
+        <!-- ================= 2 SPEAKERS ================= -->
+
+        <div class="sample-card">
+            <div class="sample-header">
+                <h4>2 Speakers (Speaker 2 off-screen)</h4>
+            </div>
+
+            <h5>Mixture</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Video</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+                <tr>
+                    <td>Mixture</td>
+                    <td>
+                        <video muted src="samples/offscreen/2_speakers_dns/speakers/mixture.mp4"></video>
+                    </td>
+                    <td><audio controls src="samples/offscreen/2_speakers_dns/mix.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/2_speakers_dns/mix.wav">
+                        loading…</td>
+                </tr>
+            </table>
+
+            <h5>Speaker 1 (On-Screen)</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+
+                <tr>
+                    <td>Reference</td>
+                    <td><audio controls src="samples/offscreen/2_speakers_dns/speakers/spk1/reference.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/2_speakers_dns/speakers/spk1/reference.wav">
+                        loading…</td>
+                </tr>
+
+                <tr>
+                    <td>RAVSS</td>
+                    <td><audio controls src="samples/offscreen/2_speakers_dns/speakers/spk1/ravss.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/2_speakers_dns/speakers/spk1/ravss.wav">
+                        loading…
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Proposed</td>
+                    <td><audio controls src="samples/offscreen/2_speakers_dns/speakers/spk1/proposed.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/2_speakers_dns/speakers/spk1/proposed.wav">
+                        loading…</td>
+                </tr>
+            </table>
+
+            <h5>Speaker 2 (Off-Screen)</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+
+                <tr>
+                    <td>Reference</td>
+                    <td><audio controls src="samples/offscreen/2_speakers_dns/speakers/spk2/reference.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/2_speakers_dns/speakers/spk2/reference.wav">
+                        loading…</td>
+                </tr>
+
+                <tr>
+                    <td>RAVSS</td>
+                    <td><audio controls src="samples/offscreen/2_speakers_dns/speakers/spk2/ravss.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/2_speakers_dns/speakers/spk2/ravss.wav">
+                        loading…
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Proposed</td>
+                    <td><audio controls src="samples/offscreen/2_speakers_dns/speakers/spk2/proposed.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/2_speakers_dns/speakers/spk2/proposed.wav">
+                        loading…</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- ================= 3 SPEAKERS ================= -->
+
+        <div class="sample-card">
+            <div class="sample-header">
+                <h4>3 Speakers (Speaker 3 off-screen)</h4>
+            </div>
+
+            <h5>Mixture</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Video</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+                <tr>
+                    <td>Mixture</td>
+                    <td>
+                        <video muted src="samples/offscreen/3_speakers_dns/speakers/mixture.mp4"></video>
+                    </td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/mix.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/mix.wav">
+                        loading…</td>
+                </tr>
+            </table>
+
+            <h5>Speaker 1 (On-Screen)</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+
+                <tr>
+                    <td>Reference</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk1/reference.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk1/reference.wav">
+                        loading…</td>
+                </tr>
+
+                <tr>
+                    <td>RAVSS</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk1/ravss.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk1/ravss.wav">
+                        loading…
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Proposed</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk1/proposed.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk1/proposed.wav">
+                        loading…</td>
+                </tr>
+            </table>
+
+            <h5>Speaker 2 (On-Screen)</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+
+                <tr>
+                    <td>Reference</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk2/reference.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk2/reference.wav">
+                        loading…</td>
+                </tr>
+
+                <tr>
+                    <td>RAVSS</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk2/ravss.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk2/ravss.wav">
+                        loading…
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Proposed</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk2/proposed.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk2/proposed.wav">
+                        loading…</td>
+                </tr>
+            </table>
+
+            <h5>Speaker 3 (Off-Screen)</h5>
+            <table>
+                <tr>
+                    <th>System</th>
+                    <th>Audio</th>
+                    <th>ASR Transcription</th>
+                </tr>
+
+                <tr>
+                    <td>Reference</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk3/reference.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk3/reference.wav">
+                        loading…</td>
+                </tr>
+
+                <tr>
+                    <td>RAVSS</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk3/ravss.wav"></audio></td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk3/ravss.wav">
+                        loading…
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Proposed</td>
+                    <td><audio controls src="samples/offscreen/3_speakers_dns/speakers/spk3/proposed.wav"></audio>
+                    </td>
+                    <td class="asr-cell" data-audio-src="samples/offscreen/3_speakers_dns/speakers/spk3/proposed.wav">
+                        loading…</td>
+                </tr>
+            </table>
+        </div>
+
+    </section>
+
+    <section class="asr">
+        <h3>Automatic Speech Recognition (ASR)</h3>
+        <p>Transcriptions are generated using Whisper (large model).</p>
+    </section>
+
+    <script src="asr.js"></script>
+</body>
+
+</html>

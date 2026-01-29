@@ -81,9 +81,59 @@ def combine_enhancement_videos():
     """Enhancement only has 1 speaker, so no combining needed."""
     print("Enhancement videos are single-speaker, no combining needed.")
 
+def combine_offscreen_2spk():
+    """Handle off-screen 2-speaker scenario where speaker 2 is off-screen."""
+    scenario_path = Path("samples/offscreen/2_speakers_dns/speakers")
+    spk1_video = scenario_path / "spk1" / "reference.mp4"
+    output_video = scenario_path / "mixture.mp4"
+    
+    if spk1_video.exists():
+        print(f"Processing: off-screen 2-speaker (speaker 1 only)")
+        # Remove existing file
+        if output_video.exists():
+            os.remove(output_video)
+        # For off-screen scenario, we just copy/re-encode the single speaker video
+        cmd = [
+            "ffmpeg", "-i", str(spk1_video),
+            "-an",  # No audio
+            "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+            str(output_video)
+        ]
+        subprocess.run(cmd, check=True)
+        print(f"Created: {output_video}")
+
+def combine_offscreen_3spk():
+    """Handle off-screen 3-speaker scenario where speaker 3 is off-screen."""
+    scenario_path = Path("samples/offscreen/3_speakers_dns/speakers")
+    spk1_video = scenario_path / "spk1" / "reference.mp4"
+    spk2_video = scenario_path / "spk2" / "reference.mp4"
+    output_video = scenario_path / "mixture.mp4"
+    
+    if spk1_video.exists() and spk2_video.exists():
+        print(f"Processing: off-screen 3-speaker (speakers 1 and 2)")
+        # Remove existing file
+        if output_video.exists():
+            os.remove(output_video)
+        # Combine 2 speaker videos side-by-side
+        cmd = [
+            "ffmpeg", "-i", str(spk1_video), "-i", str(spk2_video),
+            "-filter_complex",
+            "[0:v]tpad=stop_mode=clone[v0];"
+            "[1:v]tpad=stop_mode=clone[v1];"
+            "[v0][v1]hstack=inputs=2[v]",
+            "-map", "[v]",
+            "-an",  # No audio
+            "-c:v", "libx264", "-preset", "medium", "-crf", "23",
+            str(output_video)
+        ]
+        subprocess.run(cmd, check=True)
+        print(f"Created: {output_video}")
+
 if __name__ == "__main__":
     print("Combining speaker videos...")
     combine_videos_2spk()
     combine_videos_3spk()
     combine_enhancement_videos()
+    combine_offscreen_2spk()
+    combine_offscreen_3spk()
     print("Done!")
